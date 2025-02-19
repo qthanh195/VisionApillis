@@ -5,8 +5,8 @@
             "thresh_pp": 155,
             "ratio": 0.0921875,
             "topEdgeDistance": 1.5,
-            "sideEdgeDistance": 4.5,
-            "tolerance": 1.0
+            "sideEdgeDistance": 3.5,
+            "tolerance": 0.0
         }
     ],
     "data_default": [

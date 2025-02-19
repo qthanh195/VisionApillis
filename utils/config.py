@@ -22,8 +22,23 @@ def load_config():
     except Exception as e:
         print(f"Error loading config: {e}")
 
-def save_config(config):
-    with open(file_path, 'w') as file:
-        json.dump(config, file, indent=4)
+# def save_config(config):
+#     with open(file_path, 'w') as file:
+#         json.dump(config, file, indent=4)
 
+def save_config(data_name, data_value):
+    try:
+        with open(file_path, 'r') as file:
+            config = json.load(file)
+        
+        data_config = config['data_config'][0]
+        data_config[data_name] = data_value
+        
+        with open(file_path, 'w') as file:
+            json.dump(config, file, indent=4)
+        
+        print("Config saved successfully.")
+    except Exception as e:
+        print(f"Error saving config: {e}")
+        
 load_config()

@@ -1,4 +1,4 @@
-from PySide6.QtCore import Qt, QCoreApplication, QTextStream
+from PySide6.QtCore import Qt, QCoreApplication, QTextStream, QDate
 from PySide6.QtWidgets import QMainWindow, QMenu, QWidget, QApplication
 from PySide6.QtGui import QAction, QImage,QPixmap
 from ui.ui_form import Ui_Widget
@@ -25,6 +25,12 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess):
         self.ui.pushButton_Reset.clicked.connect(self.reset)
         self.ui.pushButton_OpenCamera.clicked.connect(self.openCamera)
         self.ui.pushButton_StartCalibration.clicked.connect(self.startCalibration)
+        
+        self.ui.lineEdit_Top.editingFinished.connect(self.save_new_top_edge)
+        self.ui.lineEdit_Side.editingFinished.connect(self.save_new_side_edge)
+        self.ui.lineEdit_Tolerance.editingFinished.connect(self.save_new_tolerance)
+        
+        
 
     def btn_ScreenOperation(self):
         self.ui.stackedWidget_Page.setCurrentIndex(0)
@@ -99,3 +105,16 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess):
         else:
             self.ui.label_PassFail.setText("Pass")
             self.ui.label_PassFail.setStyleSheet("color: green;")
+            
+    def save_new_top_edge(self):
+        self.ui.lineEdit_Top.setText(f"{float(self.ui.lineEdit_Top.text()):.2f}")
+        save_config("topEdgeDistance", float(self.ui.lineEdit_Top.text()))
+        
+    def save_new_side_edge(self):
+        self.ui.lineEdit_Side.setText(f"{float(self.ui.lineEdit_Side.text()):.2f}")
+        save_config("sideEdgeDistance", float(self.ui.lineEdit_Side.text()))
+        
+    def save_new_tolerance(self):
+        self.ui.lineEdit_Tolerance.setText(f"{float(self.ui.lineEdit_Tolerance.text()):.2f}")
+        save_config("tolerance", float(self.ui.lineEdit_Tolerance.text()))
+        

@@ -69,10 +69,9 @@ class ImageProcess:
         _, thresh = cv2.threshold(img, threshold_value, 255, cv2.THRESH_BINARY)
         thresh = cv2.blur(thresh, (3, 3), 2)
         contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-        cv2.imwrite("./thresh.jpg", thresh)
+        # cv2.imwrite("./thresh.jpg", thresh)
         for cnt in contours:
             area = cv2.contourArea(cnt)
-            print("dien tich ",area)
             if area_min < area < area_max:
                 # cv2.drawContours(self.new_img, [cnt], -1, (0, 255, 0), 2)
                 return cnt

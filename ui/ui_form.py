@@ -33,7 +33,7 @@ class Ui_Widget(object):
         self.page_Operation = QWidget()
         self.page_Operation.setObjectName(u"page_Operation")
         self.page_Operation.setStyleSheet(u"QWidget#page_Operation {\n"
-"                background-image: url('E:/2. GE/21. Apillis/ui/anh_ui/bg0.jpg');\n"
+"                background-image: url('./ui/images/bg0.jpg');\n"
 "                background-repeat: no-repeat;\n"
 "                background-position: center;\n"
 "                \n"
@@ -481,7 +481,7 @@ class Ui_Widget(object):
         self.page_Calibration = QWidget()
         self.page_Calibration.setObjectName(u"page_Calibration")
         self.page_Calibration.setStyleSheet(u"QWidget #page_Calibration{\n"
-"                background-image: url('E:/2. GE/21. Apillis/ui/anh_ui/bg1.jpg');\n"
+"                background-image: url('./ui/images/bg1.jpg');\n"
 "                background-repeat: no-repeat;\n"
 "                background-position: center;\n"
 "                background-size: cover;\n"
@@ -798,7 +798,8 @@ class Ui_Widget(object):
         self.pushButton_5.setText(QCoreApplication.translate("Widget", u"Operation", None))
         self.pushButton_Calibration.setText(QCoreApplication.translate("Widget", u"Calibration", None))
         self.pushButton_DataLog1.setText(QCoreApplication.translate("Widget", u"Data Log", None))
-        self.label_Time1.setText(QCoreApplication.translate("Widget", u"19 - 05 - 2000", None))
+        self.label_Time1.setText(QCoreApplication.translate("Widget", u"", None))
+        self.label_Time1.setText(QDate.currentDate().toString("yyyy - MM - dd"))
         self.pushButton_DataLog2.setText(QCoreApplication.translate("Widget", u"Data Log", None))
         self.pushButton_Operation.setText(QCoreApplication.translate("Widget", u"Operation", None))
         self.pushButton_Calibration_2.setText(QCoreApplication.translate("Widget", u"Calibration", None))
@@ -812,6 +813,21 @@ class Ui_Widget(object):
         self.lineEdit_FrameRate.setText(QCoreApplication.translate("Widget", u"14", None))
         self.pushButton_OpenCamera.setText(QCoreApplication.translate("Widget", u"Open Camera", None))
         self.pushButton_StartCalibration.setText(QCoreApplication.translate("Widget", u"Start Calibration", None))
-        self.label_Time2.setText(QCoreApplication.translate("Widget", u"19 - 05 - 2000", None))
+        self.label_Time2.setText(QCoreApplication.translate("Widget", u"", None))
+        self.label_Time2.setText(QDate.currentDate().toString("yyyy - MM - dd"))
+        self.lineEdit_PixelFormat.setReadOnly(True)
+        self.lineEdit_ModeExposure.setReadOnly(True)
+        self.lineEdit_ModeBalance.setReadOnly(True)
+        self.lineEdit_Exposure.setReadOnly(True)
+        self.lineEdit_Gain.setReadOnly(True)
+        self.lineEdit_FrameRate.setReadOnly(True)
+        self.lineEdit_P1.setReadOnly(True)
+        self.lineEdit_P2.setReadOnly(True)
+        self.lineEdit_P3.setReadOnly(True)
+        self.lineEdit_P4.setReadOnly(True)
+        self.lineEdit_P5.setReadOnly(True)
+        self.lineEdit_P6.setReadOnly(True)
+        self.lineEdit_passed.setReadOnly(True)
+        self.lineEdit_Total.setReadOnly(True)
     # retranslateUi
 
