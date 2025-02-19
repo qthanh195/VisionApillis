@@ -1,0 +1,1515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Widget</class>
+ <widget class="QWidget" name="Widget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1920</width>
+    <height>1080</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Widget</string>
+  </property>
+  <widget class="QStackedWidget" name="stackedWidget_Page">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>-13</y>
+     <width>1920</width>
+     <height>1080</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="page_Operation">
+    <property name="styleSheet">
+     <string notr="true">QWidget#page_Operation {
+                background-image: url('E:/2. GE/21. Apillis/ui/anh_ui/bg0.jpg');
+                background-repeat: no-repeat;
+                background-position: center;
+                
+            }</string>
+    </property>
+    <widget class="QPushButton" name="pushButton_Start">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>227</x>
+       <y>943</y>
+       <width>297</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 26px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Start</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Stop">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>604</x>
+       <y>943</y>
+       <width>297</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 26px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Stop</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Reset">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>975</x>
+       <y>943</y>
+       <width>297</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 26px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_P2">
+     <property name="geometry">
+      <rect>
+       <x>357</x>
+       <y>66</y>
+       <width>167</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_P1">
+     <property name="geometry">
+      <rect>
+       <x>674</x>
+       <y>67</y>
+       <width>167</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_P4">
+     <property name="geometry">
+      <rect>
+       <x>961</x>
+       <y>183</y>
+       <width>167</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_P3">
+     <property name="geometry">
+      <rect>
+       <x>961</x>
+       <y>444</y>
+       <width>167</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_P5">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>444</y>
+       <width>167</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_P6">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>184</y>
+       <width>167</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_Top">
+     <property name="geometry">
+      <rect>
+       <x>471</x>
+       <y>685</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>1.50</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_Side">
+     <property name="geometry">
+      <rect>
+       <x>471</x>
+       <y>752</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>3.50</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_Tolerance">
+     <property name="geometry">
+      <rect>
+       <x>471</x>
+       <y>820</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>1.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_passed">
+     <property name="geometry">
+      <rect>
+       <x>1175</x>
+       <y>685</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_Total">
+     <property name="geometry">
+      <rect>
+       <x>1175</x>
+       <y>752</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_Serial">
+     <property name="geometry">
+      <rect>
+       <x>1175</x>
+       <y>820</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_Cam1">
+     <property name="geometry">
+      <rect>
+       <x>277</x>
+       <y>127</y>
+       <width>649</width>
+       <height>434</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame {
+    border: 3px solid red;
+	border-radius: 5px;
+    background-color: transparent;
+}
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <widget class="QLabel" name="label_Cam1">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>5</y>
+        <width>640</width>
+        <height>425</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+    border: 2px ;
+
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="label_Status1">
+     <property name="geometry">
+      <rect>
+       <x>53</x>
+       <y>1017</y>
+       <width>171</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>24</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+	color: red;
+}</string>
+     </property>
+     <property name="text">
+      <string>Stop</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_PassFail">
+     <property name="geometry">
+      <rect>
+       <x>1250</x>
+       <y>260</y>
+       <width>211</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>54</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+	color: GREEN;
+}</string>
+     </property>
+     <property name="text">
+      <string>PASS</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>1510</x>
+       <y>105</y>
+       <width>412</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #2980b9;
+    border: 2px solid #2980b9;
+    color: Black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Operation</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="autoRepeat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Calibration">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>1510</x>
+       <y>207</y>
+       <width>412</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	 border: 2px solid #2980b9;
+    background-color: white;
+    color: Black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Calibration</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_DataLog1">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>1510</x>
+       <y>309</y>
+       <width>412</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: white;
+    border: 2px solid #2980b9;
+    color: Black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Data Log</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_Time1">
+     <property name="geometry">
+      <rect>
+       <x>1510</x>
+       <y>40</y>
+       <width>411</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>22</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+	color: black;
+}</string>
+     </property>
+     <property name="text">
+      <string>19 - 05 - 2000</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_Calibration">
+    <property name="styleSheet">
+     <string notr="true">QWidget #page_Calibration{
+                background-image: url('E:/2. GE/21. Apillis/ui/anh_ui/bg1.jpg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }</string>
+    </property>
+    <widget class="QPushButton" name="pushButton_DataLog2">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>1510</x>
+       <y>309</y>
+       <width>412</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: white;
+    border: 2px solid #2980b9;
+    color: Black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Data Log</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Operation">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>1510</x>
+       <y>105</y>
+       <width>412</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: white;
+    border: 2px solid #2980b9;
+    color: Black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Operation</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="autoRepeat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Calibration_2">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>1510</x>
+       <y>207</y>
+       <width>412</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #2980b9;
+    border: 2px solid #2980b9;
+    color: Black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Calibration</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_Cam2">
+     <property name="geometry">
+      <rect>
+       <x>281</x>
+       <y>130</y>
+       <width>640</width>
+       <height>425</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_PixelFormat">
+     <property name="geometry">
+      <rect>
+       <x>472</x>
+       <y>679</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>Mono8</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ModeExposure">
+     <property name="geometry">
+      <rect>
+       <x>472</x>
+       <y>754</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>Once</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ModeBalance">
+     <property name="geometry">
+      <rect>
+       <x>472</x>
+       <y>830</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>Once</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_Exposure">
+     <property name="geometry">
+      <rect>
+       <x>1175</x>
+       <y>679</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>525</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_Status2">
+     <property name="geometry">
+      <rect>
+       <x>53</x>
+       <y>1017</y>
+       <width>171</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>24</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+	color: green;
+}</string>
+     </property>
+     <property name="text">
+      <string>Running...</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_Gain">
+     <property name="geometry">
+      <rect>
+       <x>1175</x>
+       <y>754</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>0.0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_FrameRate">
+     <property name="geometry">
+      <rect>
+       <x>1175</x>
+       <y>830</y>
+       <width>167</width>
+       <height>44</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    border: 2px solid #000000;
+    border-radius:4px;
+    padding: 8px;
+    font-size: 22px;
+    background-color: #ecf0f1;
+}
+
+QLineEdit:focus {
+    border: 2px solid #2980b9;
+    background-color: #ffffff;
+}</string>
+     </property>
+     <property name="text">
+      <string>14</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_OpenCamera">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>1128</x>
+       <y>128</y>
+       <width>297</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 26px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Open Camera</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_StartCalibration">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>1128</x>
+       <y>229</y>
+       <width>297</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 26px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Start Calibration</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_Time2">
+     <property name="geometry">
+      <rect>
+       <x>1510</x>
+       <y>40</y>
+       <width>411</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>22</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+	color: black;
+}</string>
+     </property>
+     <property name="text">
+      <string>19 - 05 - 2000</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_Cam2">
+     <property name="geometry">
+      <rect>
+       <x>452</x>
+       <y>245</y>
+       <width>297</width>
+       <height>197</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame {
+    border: 3px solid green;
+	 border-radius: 10px;
+    background-color: transparent;
+}
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
