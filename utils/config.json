@@ -1,12 +1,12 @@
 {
     "data_config": [
         {
-            "thresh_bg": 210,
-            "thresh_pp": 155,
-            "ratio": 0.0921875,
+            "thresh_bg": 220,
+            "thresh_pp": 157,
+            "ratio": 0.08314049185557493,
             "topEdgeDistance": 1.5,
             "sideEdgeDistance": 3.5,
-            "tolerance": 0.0
+            "tolerance": 1.0
         }
     ],
     "data_default": [

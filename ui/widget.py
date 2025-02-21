@@ -16,8 +16,8 @@ class Widget(QWidget):
         self.ui.setupUi(self)
 
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    widget = Widget()
-    widget.show()
-    sys.exit(app.exec())
+# if __name__ == "__main__":
+#     app = QApplication(sys.argv)
+#     widget = Widget()
+#     widget.show()
+#     sys.exit(app.exec())

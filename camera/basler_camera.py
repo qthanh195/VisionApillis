@@ -1,24 +1,77 @@
 from pypylon import pylon
 import cv2
 import threading
+import queue
+import numpy as np
 
 from utils.config import thresh_bg, thresh_pp, ratio
-from image_processing.image_process import ImageProcess, detect, handle_stream, handle_stream_with_flag
+from image_processing.image_process import ImageProcess,handle_stream, handle_stream_with_flag
+from ui.ui_form import Ui_Widget
+from PySide6.QtGui import QAction, QImage,QPixmap
+from PySide6.QtCore import Qt, QCoreApplication, QTextStream, QDate
 
-# thresh_bg, thresh_pp, ratio = Config.thresh_bg, Config.thresh_pp, Config.ratio
 
-class BaslerCamera:
-    def __init__(self):
+def check_position(image, ui_widget):
+    triggler_capture = ImageProcess().detect_object(image)
+    if triggler_capture:
+        ui_widget.frame_Cam1.setStyleSheet("border: 3px solid green;")
+    else:
+        ui_widget.frame_Cam1.setStyleSheet("border: 3px solid red;")
+
+def displayCamera(image, ui_widget):
+    image,_ = ImageProcess().rotate_image(image, 180)
+    crop_width, crop_height = 3800, 2290
+    if len(image.shape) == 2:
+        height, width = image.shape
+        # Tính toán toạ độ crop (ép kiểu int)
+        x1 = int((width - crop_width) / 2)
+        y1 = int((height - crop_height) / 2)
+        x2 = x1 + crop_width
+        y2 = y1 + crop_height
+
+        # Cắt ảnh
+        image = image[y1-100:y2-100, x1:x2]
+        height, width = image.shape
+        bytes_per_line = width
+        image = np.ascontiguousarray(image)  # Đảm bảo mảng là liên tục trong bộ nhớ
+        q_image = QImage(image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
+    else:
+        frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Chuyển sang định dạng RGB
+        height, width, channel = frame.shape
+        # Tính toán toạ độ crop (ép kiểu int)
+        x1 = int((width - crop_width) / 2)
+        y1 = int((height - crop_height) / 2)
+        x2 = x1 + crop_width
+        y2 = y1 + crop_height
+
+        # Cắt ảnh
+        image = image[y1:y2, x1:x2]
+        height, width, channel = image.shape
+        bytes_per_line = 3 * width
+        image = np.ascontiguousarray(image)  # Đảm bảo mảng là liên tục trong bộ nhớ
+        q_image = QImage(image.data, width, height, bytes_per_line, QImage.Format_RGB888)
+
+    # Hiển thị QImage trên QLabel
+    pixmap = QPixmap.fromImage(q_image)
+    
+    # Đảm bảo ảnh vừa với QLabel và giữ nguyên tỷ lệ khung hình
+    scaled_pixmap1 = pixmap.scaled(ui_widget.label_Cam1.size(), Qt.KeepAspectRatio)
+    scaled_pixmap2 = pixmap.scaled(ui_widget.label_Cam2.size(), Qt.KeepAspectRatio)
+    
+    ui_widget.label_Cam1.setPixmap(scaled_pixmap1)
+    ui_widget.label_Cam2.setPixmap(scaled_pixmap2)
+        
+class BaslerCamera():
+    def __init__(self, ui_widget):
         self.camera = None
         self.is_open = False
         self.is_continuous = False
         self.grab_thread = None
-        self.setup_camera()
+        self.image_camera_basler = None
+        self.ui_widget = ui_widget
 
     def setup_camera(self):
         """Thiết lập cấu hình camera."""
-        
-        self.open_camera()
         
         self.camera.PixelFormat.Value = "Mono8" # Đặt định dạng pixel thành Mono8
         self.camera.ExposureAuto.Value = "Once" ## Đặt chế độ tự động điều chỉnh độ sáng thành Once
@@ -32,6 +85,7 @@ class BaslerCamera:
             self.camera.Open()
             self.is_open = True
             print("Camera đã mở.")
+            self.setup_camera()
         except Exception as e:
             print(f"Lỗi khi mở camera: {e}")
 
@@ -75,39 +129,32 @@ class BaslerCamera:
         self.is_continuous = True
 
         def grab_images():
-            img_new_resized = None
+            count_frame = 0
             self.camera.StartGrabbing(pylon.GrabStrategy_LatestImageOnly)
             while self.is_continuous:
                 grab_result = self.camera.RetrieveResult(490, pylon.TimeoutHandling_ThrowException)
 
                 if grab_result.GrabSucceeded():
                     # Chuyển đổi hình ảnh sang định dạng OpenCV
-                    img = grab_result.Array
-                    img_resized = cv2.resize(img, (0, 0), fx=0.4, fy=0.4)
-                    cv2.imshow("Continuous Grab", img_resized)
-                    if img_new_resized is not None:
-                        cv2.imshow("Img dimension", img_new_resized)
-
-                    # Thoát chế độ chụp liên tục khi nhấn phím 'q'
+                    self.image_camera_basler = grab_result.Array
+                    displayCamera(self.image_camera_basler, self.ui_widget)
+                    count_frame += 1
+                    if count_frame % 16 == 0:
+                        check_position(self.image_camera_basler, self.ui_widget)
+                        # print(f"Frame: {count_frame}")
+                    
                     key = cv2.waitKey(1) & 0xFF
                     if key == ord('q'):
                         break
-                    if key == ord('s'):
-                        print("single shot")
-                        circles = detect(img, thresh_bg, thresh_pp)
-                        if circles:
-                            img_process = ImageProcess(img, thresh_bg, thresh_pp)
-                            img_process.dimension()
-                            img_new = cv2.imread("./Image/test222.jpg")
-                            img_new_resized = cv2.resize(img_new, (0, 0), fx=0.4, fy=0.4)
-                        else:
-                            print(" Không có vật")
-                            img_new_resized = None
                     
                 grab_result.Release()
 
             self.camera.StopGrabbing()
             cv2.destroyAllWindows()
+
+        # Kiểm tra và dừng luồng cũ nếu đang chạy
+        if self.grab_thread and self.grab_thread.is_alive():
+            self.stop_continuous_grabbing()
 
         self.grab_thread = threading.Thread(target=grab_images)
         self.grab_thread.start()

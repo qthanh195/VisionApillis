@@ -19,12 +19,10 @@ def load_config():
         tolerance = data_config['tolerance']
         
         print("Config loaded successfully.")
+        return thresh_bg, thresh_pp, ratio, topEdgeDistance, sideEdgeDistance, tolerance
     except Exception as e:
         print(f"Error loading config: {e}")
 
-# def save_config(config):
-#     with open(file_path, 'w') as file:
-#         json.dump(config, file, indent=4)
 
 def save_config(data_name, data_value):
     try:
@@ -40,5 +38,7 @@ def save_config(data_name, data_value):
         print("Config saved successfully.")
     except Exception as e:
         print(f"Error saving config: {e}")
+        
+
         
 load_config()
