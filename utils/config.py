@@ -1,3 +1,4 @@
+# 149.55mm = 1868.51697 pixel -> 1mm = 12.50265 pixel -> 1 pixel = 0.08
 import json
 
 file_path = "./utils/config.json"

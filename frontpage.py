@@ -1,13 +1,14 @@
 from PySide6.QtCore import Qt, QCoreApplication, QTextStream, QDate
-from PySide6.QtWidgets import QMainWindow, QMenu, QWidget, QApplication
+from PySide6.QtWidgets import QMainWindow, QMenu, QWidget, QApplication, QMessageBox
 from PySide6.QtGui import QAction, QImage,QPixmap
 from ui.ui_form import Ui_Widget
 from camera.basler_camera import BaslerCamera
 from image_processing.image_process import ImageProcess
-from utils.config import load_config, save_config, thresh_bg, thresh_pp, ratio, topEdgeDistance, sideEdgeDistance, tolerance
+from utils.config import  load_config, save_config, thresh_bg, thresh_pp, ratio, topEdgeDistance, sideEdgeDistance, tolerance
 
 import cv2
 import time
+import threading
 
 class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess):
     def __init__(self):
@@ -15,10 +16,8 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess):
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
         self.camera = BaslerCamera(self.ui)
-        
-        # self.displayCamera()
-        # if 
-        
+        self.timer_thread = None
+
         self.ui.pushButton_Calibration.clicked.connect(self.btn_ScreenCalibration)
         self.ui.pushButton_Operation.clicked.connect(self.btn_ScreenOperation)
         self.ui.pushButton_DataLog1.clicked.connect(self.btn_DataLog)
@@ -41,6 +40,10 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess):
         self.ui.stackedWidget_Page.setCurrentIndex(1)
         
     def btn_DataLog(self):
+        pass
+        
+    def button_checkDimension(self):
+        """Check the dimension of the object."""
         if not self.camera.is_open:
             print("Camera is not open. Please open the camera first.")
             return
@@ -49,46 +52,67 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess):
             return
         triggler_test = self.detect_object(self.camera.image_camera_basler)
         if triggler_test:
-            self.camera.stop_continuous_grabbing()
-            # image_test = self.camera.single_shot()
-            # if image_test is None:
-            #     print("Failed to capture image.")
-            #     return
-            # cv2.imwrite("image_test.jpg", image_test)
+            self.continuousStop()
             self.check_pass_fail(self.camera.image_camera_basler)
-            #đóng camera đảm bảo xóa hết
             self.camera.close_camera()
         else:
             print("Sai khung hình.")
         
-        
+    def buton_ignore(self):
+        """Ignore and continue mode continuous."""
+        if not self.camera.is_open:
+            self.camera.open_camera()
+        self.continuousStart()
+     
     def start(self):
         self.camera.open_camera()
         self.reload_config_values()
 
     def stop(self):
-        self.camera.stop_continuous_grabbing()
+        self.continuousStop()
         self.camera.close_camera()
     
     def reset(self):
-        if not self.camera.is_open:
-            self.camera.open_camera()
-        self.camera.start_continuous_grabbing()
+        self.buton_ignore()
     
     def openCamera(self):
-        im = self.camera.single_shot()
-        # cv2.imwrite("img_test1.jpg", im)
+        pass
     
     def startCalibration(self):
         print("log data...")
         self.reset()
+    
+    def continuousStop(self):
+        self.camera.stop_continuous_grabbing()
+        if self.timer_thread and self.timer_thread.is_alive():
+            self.timer_thread.cancel()
         
+    def continuousStart(self):
+        self.camera.start_continuous_grabbing()
+        self.start_timer_close_camera()
     
     def closeEvent(self, event):
-        
-        pass
+        """Xử lý sự kiện đóng cửa sổ."""
+        reply = QMessageBox.question(self, 'Message',
+            "Bạn có chắc chắn muốn thoát?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            if self.camera.is_open:
+                self.stop()  # Dừng chụp liên tục và tắt camera
+            event.accept()
+        else:
+            event.ignore()
     
-    def displayCamera(self, image = cv2.imread("showcheck.jpg")):
+    def start_timer_close_camera(self):
+        """Bắt đầu bộ đếm thời gian để tắt camera sau 2 phút."""
+        if self.timer_thread and self.timer_thread.is_alive():
+            self.timer_thread.cancel()  # Hủy bộ đếm thời gian cũ nếu đang chạy
+        
+        self.timer_thread = threading.Timer(120, self.stop)  # 120 giây = 2 phút
+        self.timer_thread.start()
+        print("bat dau dem thoi gian")
+    
+    def displayCamera(self, image):
         if len(image.shape) == 2:
             height, width = image.shape
             bytes_per_line = width
@@ -144,3 +168,9 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess):
     def reload_config_values(self):
         global thresh_bg, thresh_pp, ratio, topEdgeDistance, sideEdgeDistance, tolerance
         thresh_bg, thresh_pp, ratio, topEdgeDistance, sideEdgeDistance, tolerance = load_config()
+        exposure_time, gain, frame_rate = self.camera.get_camera_info()
+        self.ui.lineEdit_Exposure.setText(f"{exposure_time:.0f}")
+        self.ui.lineEdit_Gain.setText(f"{gain:.1f}")
+        self.ui.lineEdit_FrameRate.setText(f"{frame_rate:.0f}")
+        
+        

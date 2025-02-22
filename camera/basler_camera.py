@@ -5,61 +5,11 @@ import queue
 import numpy as np
 
 from utils.config import thresh_bg, thresh_pp, ratio
-from image_processing.image_process import ImageProcess,handle_stream, handle_stream_with_flag
+from image_processing.image_process import ImageProcess
 from ui.ui_form import Ui_Widget
 from PySide6.QtGui import QAction, QImage,QPixmap
 from PySide6.QtCore import Qt, QCoreApplication, QTextStream, QDate
 
-
-def check_position(image, ui_widget):
-    triggler_capture = ImageProcess().detect_object(image)
-    if triggler_capture:
-        ui_widget.frame_Cam1.setStyleSheet("border: 3px solid green;")
-    else:
-        ui_widget.frame_Cam1.setStyleSheet("border: 3px solid red;")
-
-def displayCamera(image, ui_widget):
-    image,_ = ImageProcess().rotate_image(image, 180)
-    crop_width, crop_height = 3800, 2290
-    if len(image.shape) == 2:
-        height, width = image.shape
-        # Tính toán toạ độ crop (ép kiểu int)
-        x1 = int((width - crop_width) / 2)
-        y1 = int((height - crop_height) / 2)
-        x2 = x1 + crop_width
-        y2 = y1 + crop_height
-
-        # Cắt ảnh
-        image = image[y1-100:y2-100, x1:x2]
-        height, width = image.shape
-        bytes_per_line = width
-        image = np.ascontiguousarray(image)  # Đảm bảo mảng là liên tục trong bộ nhớ
-        q_image = QImage(image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
-    else:
-        frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Chuyển sang định dạng RGB
-        height, width, channel = frame.shape
-        # Tính toán toạ độ crop (ép kiểu int)
-        x1 = int((width - crop_width) / 2)
-        y1 = int((height - crop_height) / 2)
-        x2 = x1 + crop_width
-        y2 = y1 + crop_height
-
-        # Cắt ảnh
-        image = image[y1:y2, x1:x2]
-        height, width, channel = image.shape
-        bytes_per_line = 3 * width
-        image = np.ascontiguousarray(image)  # Đảm bảo mảng là liên tục trong bộ nhớ
-        q_image = QImage(image.data, width, height, bytes_per_line, QImage.Format_RGB888)
-
-    # Hiển thị QImage trên QLabel
-    pixmap = QPixmap.fromImage(q_image)
-    
-    # Đảm bảo ảnh vừa với QLabel và giữ nguyên tỷ lệ khung hình
-    scaled_pixmap1 = pixmap.scaled(ui_widget.label_Cam1.size(), Qt.KeepAspectRatio)
-    scaled_pixmap2 = pixmap.scaled(ui_widget.label_Cam2.size(), Qt.KeepAspectRatio)
-    
-    ui_widget.label_Cam1.setPixmap(scaled_pixmap1)
-    ui_widget.label_Cam2.setPixmap(scaled_pixmap2)
         
 class BaslerCamera():
     def __init__(self, ui_widget):
@@ -76,7 +26,7 @@ class BaslerCamera():
         self.camera.PixelFormat.Value = "Mono8" # Đặt định dạng pixel thành Mono8
         self.camera.ExposureAuto.Value = "Once" ## Đặt chế độ tự động điều chỉnh độ sáng thành Once
         self.camera.BalanceWhiteAuto.Value = "Once" # Đặt chế độ tự động điều chỉnh màu trắng thành Once
-        self.print_camera_settings()
+        # self.print_camera_settings()
         
     def open_camera(self):
         """Mở camera Basler."""
@@ -137,12 +87,10 @@ class BaslerCamera():
                 if grab_result.GrabSucceeded():
                     # Chuyển đổi hình ảnh sang định dạng OpenCV
                     self.image_camera_basler = grab_result.Array
-                    displayCamera(self.image_camera_basler, self.ui_widget)
+                    self.displayCamera()
                     count_frame += 1
                     if count_frame % 16 == 0:
-                        check_position(self.image_camera_basler, self.ui_widget)
-                        # print(f"Frame: {count_frame}")
-                    
+                        self.check_position()
                     key = cv2.waitKey(1) & 0xFF
                     if key == ord('q'):
                         break
@@ -173,9 +121,10 @@ class BaslerCamera():
             return
 
         try:
-            info = self.camera.GetDeviceInfo()
-            print(f"Tên thiết bị: {info.GetModelName()}")
-            print(f"Số sê-ri: {info.GetSerialNumber()}")
+            exposure_time = self.camera.ExposureTime.Value
+            gain =  self.camera.Gain.Value
+            frame_rate = self.camera.AcquisitionFrameRate.Value
+            return  exposure_time, gain, frame_rate
         except Exception as e:
             print(f"Lỗi khi lấy thông tin camera: {e}")
             
@@ -190,3 +139,53 @@ class BaslerCamera():
             print(f"Frame Rate: {self.camera.AcquisitionFrameRate.Value}")
         except Exception as e:
             print(f"Lỗi khi in thông số camera: {e}")
+
+    def check_position(self):
+        triggler_capture = ImageProcess().detect_object(self.image_camera_basler)
+        if triggler_capture:
+            self.ui_widget.frame_Cam1.setStyleSheet("border: 3px solid green;")
+        else:
+            self.ui_widget.frame_Cam1.setStyleSheet("border: 3px solid red;")
+            
+    def displayCamera(self):
+        image,_ = ImageProcess().rotate_image(self.image_camera_basler, 180)
+        crop_width, crop_height = 3800, 2290
+        if len(image.shape) == 2:
+            height, width = image.shape
+            # Tính toán toạ độ crop (ép kiểu int)
+            x1 = int((width - crop_width) / 2)
+            y1 = int((height - crop_height) / 2)
+            x2 = x1 + crop_width
+            y2 = y1 + crop_height
+
+            # Cắt ảnh
+            image = image[y1-100:y2-100, x1:x2]
+            height, width = image.shape
+            bytes_per_line = width
+            image = np.ascontiguousarray(image)  # Đảm bảo mảng là liên tục trong bộ nhớ
+            q_image = QImage(image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
+        else:
+            frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Chuyển sang định dạng RGB
+            height, width, channel = frame.shape
+            # Tính toán toạ độ crop (ép kiểu int)
+            x1 = int((width - crop_width) / 2)
+            y1 = int((height - crop_height) / 2)
+            x2 = x1 + crop_width
+            y2 = y1 + crop_height
+
+            # Cắt ảnh
+            image = image[y1-100:y2-100, x1:x2]
+            height, width, channel = image.shape
+            bytes_per_line = 3 * width
+            image = np.ascontiguousarray(image)  # Đảm bảo mảng là liên tục trong bộ nhớ
+            q_image = QImage(image.data, width, height, bytes_per_line, QImage.Format_RGB888)
+
+        # Hiển thị QImage trên QLabel
+        pixmap = QPixmap.fromImage(q_image)
+        
+        # Đảm bảo ảnh vừa với QLabel và giữ nguyên tỷ lệ khung hình
+        scaled_pixmap1 = pixmap.scaled(self.ui_widget.label_Cam1.size(), Qt.KeepAspectRatio)
+        scaled_pixmap2 = pixmap.scaled(self.ui_widget.label_Cam2.size(), Qt.KeepAspectRatio)
+        
+        self.ui_widget.label_Cam1.setPixmap(scaled_pixmap1)
+        self.ui_widget.label_Cam2.setPixmap(scaled_pixmap2)
