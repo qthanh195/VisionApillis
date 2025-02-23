@@ -31,7 +31,7 @@
    <widget class="QWidget" name="page_Operation">
     <property name="styleSheet">
      <string notr="true">QWidget#page_Operation {
-                background-image: url('E:/2. GE/21. Apillis/ui/anh_ui/bg0.jpg');
+                background-image: url('E:/2. GE/21. Apillis/ui/anh_ui/bg0_3.jpg');
                 background-repeat: no-repeat;
                 background-position: center;
                 
@@ -43,9 +43,9 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>227</x>
-       <y>943</y>
-       <width>297</width>
+       <x>320</x>
+       <y>950</y>
+       <width>301</width>
        <height>71</height>
       </rect>
      </property>
@@ -89,15 +89,15 @@ QPushButton:pressed {
       <string>Start</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_Stop">
+    <widget class="QPushButton" name="pushButton_Skip">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
-       <x>604</x>
-       <y>943</y>
-       <width>297</width>
+       <x>766</x>
+       <y>950</y>
+       <width>250</width>
        <height>71</height>
       </rect>
      </property>
@@ -138,18 +138,18 @@ QPushButton:pressed {
 }</string>
      </property>
      <property name="text">
-      <string>Stop</string>
+      <string>Skip</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_Reset">
+    <widget class="QPushButton" name="pushButton_SaveData">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
-       <x>975</x>
-       <y>943</y>
-       <width>297</width>
+       <x>1166</x>
+       <y>950</y>
+       <width>250</width>
        <height>71</height>
       </rect>
      </property>
@@ -190,14 +190,14 @@ QPushButton:pressed {
 }</string>
      </property>
      <property name="text">
-      <string>Reset</string>
+      <string>Save Data</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_P2">
      <property name="geometry">
       <rect>
        <x>357</x>
-       <y>66</y>
+       <y>51</y>
        <width>167</width>
        <height>43</height>
       </rect>
@@ -233,8 +233,8 @@ QLineEdit:focus {
     <widget class="QLineEdit" name="lineEdit_P1">
      <property name="geometry">
       <rect>
-       <x>674</x>
-       <y>67</y>
+       <x>678</x>
+       <y>51</y>
        <width>167</width>
        <height>43</height>
       </rect>
@@ -270,7 +270,7 @@ QLineEdit:focus {
     <widget class="QLineEdit" name="lineEdit_P4">
      <property name="geometry">
       <rect>
-       <x>961</x>
+       <x>994</x>
        <y>183</y>
        <width>167</width>
        <height>43</height>
@@ -307,8 +307,8 @@ QLineEdit:focus {
     <widget class="QLineEdit" name="lineEdit_P3">
      <property name="geometry">
       <rect>
-       <x>961</x>
-       <y>444</y>
+       <x>994</x>
+       <y>460</y>
        <width>167</width>
        <height>43</height>
       </rect>
@@ -344,8 +344,8 @@ QLineEdit:focus {
     <widget class="QLineEdit" name="lineEdit_P5">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>444</y>
+       <x>38</x>
+       <y>460</y>
        <width>167</width>
        <height>43</height>
       </rect>
@@ -381,8 +381,8 @@ QLineEdit:focus {
     <widget class="QLineEdit" name="lineEdit_P6">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>184</y>
+       <x>38</x>
+       <y>183</y>
        <width>167</width>
        <height>43</height>
       </rect>
@@ -640,10 +640,10 @@ QLineEdit:focus {
     <widget class="QFrame" name="frame_Cam1">
      <property name="geometry">
       <rect>
-       <x>277</x>
-       <y>127</y>
-       <width>649</width>
-       <height>434</height>
+       <x>237</x>
+       <y>116</y>
+       <width>734</width>
+       <height>447</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -663,10 +663,10 @@ QLineEdit:focus {
      <widget class="QLabel" name="label_Cam1">
       <property name="geometry">
        <rect>
-        <x>5</x>
-        <y>5</y>
-        <width>640</width>
-        <height>425</height>
+        <x>0</x>
+        <y>0</y>
+        <width>734</width>
+        <height>447</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -918,11 +918,63 @@ QPushButton:pressed {
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_Measure">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>994</x>
+       <y>950</y>
+       <width>301</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>-1</pointsize>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 26px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+QPushButton:pressed {
+    background-color: #2980b9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}</string>
+     </property>
+     <property name="text">
+      <string>Measure</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="page_Calibration">
     <property name="styleSheet">
      <string notr="true">QWidget #page_Calibration{
-                background-image: url('E:/2. GE/21. Apillis/ui/anh_ui/bg1.jpg');
+                background-image: url('E:/2. GE/21. Apillis/ui/anh_ui/bg1_2.jpg');
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;
@@ -1088,22 +1140,6 @@ QPushButton:pressed {
      </property>
      <property name="text">
       <string>Calibration</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_Cam2">
-     <property name="geometry">
-      <rect>
-       <x>281</x>
-       <y>130</y>
-       <width>640</width>
-       <height>425</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_PixelFormat">
@@ -1358,8 +1394,8 @@ QLineEdit:focus {
      </property>
      <property name="geometry">
       <rect>
-       <x>1128</x>
-       <y>128</y>
+       <x>291</x>
+       <y>923</y>
        <width>297</width>
        <height>71</height>
       </rect>
@@ -1410,8 +1446,8 @@ QPushButton:pressed {
      </property>
      <property name="geometry">
       <rect>
-       <x>1128</x>
-       <y>229</y>
+       <x>897</x>
+       <y>923</y>
        <width>297</width>
        <height>71</height>
       </rect>
@@ -1483,28 +1519,23 @@ QPushButton:pressed {
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QFrame" name="frame_Cam2">
+    <widget class="QLabel" name="label_Cam2">
      <property name="geometry">
       <rect>
-       <x>452</x>
-       <y>245</y>
-       <width>297</width>
-       <height>197</height>
+       <x>323</x>
+       <y>66</y>
+       <width>841</width>
+       <height>509</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QFrame {
-    border: 3px solid green;
-	 border-radius: 10px;
-    background-color: transparent;
-}
-</string>
+      <string notr="true">QLabel {
+    border: 2px solid black ;
+
+}</string>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::Shape::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Shadow::Raised</enum>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </widget>

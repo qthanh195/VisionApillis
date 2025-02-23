@@ -21,7 +21,6 @@ from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QLineEdit,
 from utils.config import topEdgeDistance, sideEdgeDistance,tolerance
 
 class Ui_Widget(object):
-        
     def setupUi(self, Widget):
         if not Widget.objectName():
             Widget.setObjectName(u"Widget")
@@ -41,7 +40,7 @@ class Ui_Widget(object):
         self.pushButton_Start = QPushButton(self.page_Operation)
         self.pushButton_Start.setObjectName(u"pushButton_Start")
         self.pushButton_Start.setEnabled(True)
-        self.pushButton_Start.setGeometry(QRect(227, 943, 297, 71))
+        self.pushButton_Start.setGeometry(QRect(320, 950, 301, 71))
         font = QFont()
         font.setFamilies([u"Arial"])
         font.setBold(False)
@@ -73,12 +72,12 @@ class Ui_Widget(object):
 "    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);\n"
 "    transform: translateY(2px);\n"
 "}")
-        self.pushButton_Stop = QPushButton(self.page_Operation)
-        self.pushButton_Stop.setObjectName(u"pushButton_Stop")
-        self.pushButton_Stop.setEnabled(True)
-        self.pushButton_Stop.setGeometry(QRect(604, 943, 297, 71))
-        self.pushButton_Stop.setFont(font)
-        self.pushButton_Stop.setStyleSheet(u"QPushButton {\n"
+        self.pushButton_Skip = QPushButton(self.page_Operation)
+        self.pushButton_Skip.setObjectName(u"pushButton_Skip")
+        self.pushButton_Skip.setEnabled(True)
+        self.pushButton_Skip.setGeometry(QRect(766, 950, 250, 71))
+        self.pushButton_Skip.setFont(font)
+        self.pushButton_Skip.setStyleSheet(u"QPushButton {\n"
 "    background-color: #3498db;\n"
 "    border: none;\n"
 "    color: white;\n"
@@ -102,12 +101,12 @@ class Ui_Widget(object):
 "    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);\n"
 "    transform: translateY(2px);\n"
 "}")
-        self.pushButton_Reset = QPushButton(self.page_Operation)
-        self.pushButton_Reset.setObjectName(u"pushButton_Reset")
-        self.pushButton_Reset.setEnabled(True)
-        self.pushButton_Reset.setGeometry(QRect(975, 943, 297, 71))
-        self.pushButton_Reset.setFont(font)
-        self.pushButton_Reset.setStyleSheet(u"QPushButton {\n"
+        self.pushButton_SaveData = QPushButton(self.page_Operation)
+        self.pushButton_SaveData.setObjectName(u"pushButton_SaveData")
+        self.pushButton_SaveData.setEnabled(True)
+        self.pushButton_SaveData.setGeometry(QRect(1166, 950, 250, 71))
+        self.pushButton_SaveData.setFont(font)
+        self.pushButton_SaveData.setStyleSheet(u"QPushButton {\n"
 "    background-color: #3498db;\n"
 "    border: none;\n"
 "    color: white;\n"
@@ -133,7 +132,7 @@ class Ui_Widget(object):
 "}")
         self.lineEdit_P2 = QLineEdit(self.page_Operation)
         self.lineEdit_P2.setObjectName(u"lineEdit_P2")
-        self.lineEdit_P2.setGeometry(QRect(357, 66, 167, 43))
+        self.lineEdit_P2.setGeometry(QRect(357, 51, 167, 43))
         font1 = QFont()
         font1.setFamilies([u"Arial"])
         font1.setBold(True)
@@ -153,7 +152,7 @@ class Ui_Widget(object):
         self.lineEdit_P2.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEdit_P1 = QLineEdit(self.page_Operation)
         self.lineEdit_P1.setObjectName(u"lineEdit_P1")
-        self.lineEdit_P1.setGeometry(QRect(674, 67, 167, 43))
+        self.lineEdit_P1.setGeometry(QRect(678, 51, 167, 43))
         self.lineEdit_P1.setFont(font1)
         self.lineEdit_P1.setStyleSheet(u"QLineEdit {\n"
 "    border: 2px solid #000000;\n"
@@ -170,7 +169,7 @@ class Ui_Widget(object):
         self.lineEdit_P1.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEdit_P4 = QLineEdit(self.page_Operation)
         self.lineEdit_P4.setObjectName(u"lineEdit_P4")
-        self.lineEdit_P4.setGeometry(QRect(961, 183, 167, 43))
+        self.lineEdit_P4.setGeometry(QRect(994, 183, 167, 43))
         self.lineEdit_P4.setFont(font1)
         self.lineEdit_P4.setStyleSheet(u"QLineEdit {\n"
 "    border: 2px solid #000000;\n"
@@ -187,7 +186,7 @@ class Ui_Widget(object):
         self.lineEdit_P4.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEdit_P3 = QLineEdit(self.page_Operation)
         self.lineEdit_P3.setObjectName(u"lineEdit_P3")
-        self.lineEdit_P3.setGeometry(QRect(961, 444, 167, 43))
+        self.lineEdit_P3.setGeometry(QRect(994, 460, 167, 43))
         self.lineEdit_P3.setFont(font1)
         self.lineEdit_P3.setStyleSheet(u"QLineEdit {\n"
 "    border: 2px solid #000000;\n"
@@ -204,7 +203,7 @@ class Ui_Widget(object):
         self.lineEdit_P3.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEdit_P5 = QLineEdit(self.page_Operation)
         self.lineEdit_P5.setObjectName(u"lineEdit_P5")
-        self.lineEdit_P5.setGeometry(QRect(80, 444, 167, 43))
+        self.lineEdit_P5.setGeometry(QRect(38, 460, 167, 43))
         self.lineEdit_P5.setFont(font1)
         self.lineEdit_P5.setStyleSheet(u"QLineEdit {\n"
 "    border: 2px solid #000000;\n"
@@ -221,7 +220,7 @@ class Ui_Widget(object):
         self.lineEdit_P5.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.lineEdit_P6 = QLineEdit(self.page_Operation)
         self.lineEdit_P6.setObjectName(u"lineEdit_P6")
-        self.lineEdit_P6.setGeometry(QRect(80, 184, 167, 43))
+        self.lineEdit_P6.setGeometry(QRect(38, 183, 167, 43))
         self.lineEdit_P6.setFont(font1)
         self.lineEdit_P6.setStyleSheet(u"QLineEdit {\n"
 "    border: 2px solid #000000;\n"
@@ -340,7 +339,7 @@ class Ui_Widget(object):
         self.lineEdit_Serial.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.frame_Cam1 = QFrame(self.page_Operation)
         self.frame_Cam1.setObjectName(u"frame_Cam1")
-        self.frame_Cam1.setGeometry(QRect(277, 127, 649, 434))
+        self.frame_Cam1.setGeometry(QRect(237, 116, 734, 447))
         self.frame_Cam1.setStyleSheet(u"QFrame {\n"
 "    border: 3px solid red;\n"
 "	border-radius: 5px;\n"
@@ -351,7 +350,7 @@ class Ui_Widget(object):
         self.frame_Cam1.setFrameShadow(QFrame.Shadow.Raised)
         self.label_Cam1 = QLabel(self.frame_Cam1)
         self.label_Cam1.setObjectName(u"label_Cam1")
-        self.label_Cam1.setGeometry(QRect(5, 5, 640, 425))
+        self.label_Cam1.setGeometry(QRect(0, 0, 734, 447))
         self.label_Cam1.setStyleSheet(u"QLabel {\n"
 "    border: 2px ;\n"
 "\n"
@@ -477,6 +476,35 @@ class Ui_Widget(object):
 "	color: black;\n"
 "}")
         self.label_Time1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.pushButton_Measure = QPushButton(self.page_Operation)
+        self.pushButton_Measure.setObjectName(u"pushButton_Measure")
+        self.pushButton_Measure.setEnabled(True)
+        self.pushButton_Measure.setGeometry(QRect(994, 950, 301, 71))
+        self.pushButton_Measure.setFont(font)
+        self.pushButton_Measure.setStyleSheet(u"QPushButton {\n"
+"    background-color: #3498db;\n"
+"    border: none;\n"
+"    color: white;\n"
+"    padding: 10px 20px;\n"
+"    text-align: center;\n"
+"    text-decoration: none;\n"
+"    font-size: 26px;\n"
+"    margin: 4px 2px;\n"
+"    transition-duration: 0.4s;\n"
+"    cursor: pointer;\n"
+"    border-radius: 12px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #2980b9;\n"
+"    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);\n"
+"    transform: translateY(2px);\n"
+"}")
         self.stackedWidget_Page.addWidget(self.page_Operation)
         self.page_Calibration = QWidget()
         self.page_Calibration.setObjectName(u"page_Calibration")
@@ -575,10 +603,6 @@ class Ui_Widget(object):
 "    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);\n"
 "    transform: translateY(2px);\n"
 "}")
-        self.label_Cam2 = QLabel(self.page_Calibration)
-        self.label_Cam2.setObjectName(u"label_Cam2")
-        self.label_Cam2.setGeometry(QRect(281, 130, 640, 425))
-        self.label_Cam2.setStyleSheet(u"")
         self.lineEdit_PixelFormat = QLineEdit(self.page_Calibration)
         self.lineEdit_PixelFormat.setObjectName(u"lineEdit_PixelFormat")
         self.lineEdit_PixelFormat.setGeometry(QRect(472, 679, 167, 44))
@@ -691,7 +715,7 @@ class Ui_Widget(object):
         self.pushButton_OpenCamera = QPushButton(self.page_Calibration)
         self.pushButton_OpenCamera.setObjectName(u"pushButton_OpenCamera")
         self.pushButton_OpenCamera.setEnabled(True)
-        self.pushButton_OpenCamera.setGeometry(QRect(1128, 128, 297, 71))
+        self.pushButton_OpenCamera.setGeometry(QRect(291, 923, 297, 71))
         self.pushButton_OpenCamera.setFont(font)
         self.pushButton_OpenCamera.setStyleSheet(u"QPushButton {\n"
 "    background-color: #3498db;\n"
@@ -720,7 +744,7 @@ class Ui_Widget(object):
         self.pushButton_StartCalibration = QPushButton(self.page_Calibration)
         self.pushButton_StartCalibration.setObjectName(u"pushButton_StartCalibration")
         self.pushButton_StartCalibration.setEnabled(True)
-        self.pushButton_StartCalibration.setGeometry(QRect(1128, 229, 297, 71))
+        self.pushButton_StartCalibration.setGeometry(QRect(897, 923, 297, 71))
         self.pushButton_StartCalibration.setFont(font)
         self.pushButton_StartCalibration.setStyleSheet(u"QPushButton {\n"
 "    background-color: #3498db;\n"
@@ -754,17 +778,13 @@ class Ui_Widget(object):
 "	color: black;\n"
 "}")
         self.label_Time2.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.frame_Cam2 = QFrame(self.page_Calibration)
-        self.frame_Cam2.setObjectName(u"frame_Cam2")
-        self.frame_Cam2.setGeometry(QRect(452, 245, 297, 197))
-        self.frame_Cam2.setStyleSheet(u"QFrame {\n"
-"    border: 3px solid green;\n"
-"	 border-radius: 10px;\n"
-"    background-color: transparent;\n"
-"}\n"
-"")
-        self.frame_Cam2.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_Cam2.setFrameShadow(QFrame.Shadow.Raised)
+        self.label_Cam2 = QLabel(self.page_Calibration)
+        self.label_Cam2.setObjectName(u"label_Cam2")
+        self.label_Cam2.setGeometry(QRect(323, 66, 841, 509))
+        self.label_Cam2.setStyleSheet(u"QLabel {\n"
+"    border: 2px solid black ;\n"
+"\n"
+"}")
         self.stackedWidget_Page.addWidget(self.page_Calibration)
 
         self.retranslateUi(Widget)
@@ -778,8 +798,8 @@ class Ui_Widget(object):
     def retranslateUi(self, Widget):
         Widget.setWindowTitle(QCoreApplication.translate("Widget", u"Widget", None))
         self.pushButton_Start.setText(QCoreApplication.translate("Widget", u"Start", None))
-        self.pushButton_Stop.setText(QCoreApplication.translate("Widget", u"Stop", None))
-        self.pushButton_Reset.setText(QCoreApplication.translate("Widget", u"Reset", None))
+        self.pushButton_Skip.setText(QCoreApplication.translate("Widget", u"Skip", None))
+        self.pushButton_SaveData.setText(QCoreApplication.translate("Widget", u"Save Data", None))
         self.lineEdit_P2.setText(QCoreApplication.translate("Widget", u"0.00", None))
         self.lineEdit_P1.setText(QCoreApplication.translate("Widget", u"0.00", None))
         self.lineEdit_P4.setText(QCoreApplication.translate("Widget", u"0.00", None))
@@ -800,10 +820,10 @@ class Ui_Widget(object):
         self.pushButton_DataLog1.setText(QCoreApplication.translate("Widget", u"Data Log", None))
         self.label_Time1.setText(QCoreApplication.translate("Widget", u"", None))
         self.label_Time1.setText(QDate.currentDate().toString("yyyy - MM - dd"))
+        self.pushButton_Measure.setText(QCoreApplication.translate("Widget", u"Measure", None))
         self.pushButton_DataLog2.setText(QCoreApplication.translate("Widget", u"Data Log", None))
         self.pushButton_Operation.setText(QCoreApplication.translate("Widget", u"Operation", None))
         self.pushButton_Calibration_2.setText(QCoreApplication.translate("Widget", u"Calibration", None))
-        self.label_Cam2.setText("")
         self.lineEdit_PixelFormat.setText(QCoreApplication.translate("Widget", u"Mono8", None))
         self.lineEdit_ModeExposure.setText(QCoreApplication.translate("Widget", u"Once", None))
         self.lineEdit_ModeBalance.setText(QCoreApplication.translate("Widget", u"Once", None))
@@ -815,6 +835,7 @@ class Ui_Widget(object):
         self.pushButton_StartCalibration.setText(QCoreApplication.translate("Widget", u"Start Calibration", None))
         self.label_Time2.setText(QCoreApplication.translate("Widget", u"", None))
         self.label_Time2.setText(QDate.currentDate().toString("yyyy - MM - dd"))
+        self.label_Cam2.setText("")
         self.lineEdit_PixelFormat.setReadOnly(True)
         self.lineEdit_ModeExposure.setReadOnly(True)
         self.lineEdit_ModeBalance.setReadOnly(True)
@@ -829,5 +850,7 @@ class Ui_Widget(object):
         self.lineEdit_P6.setReadOnly(True)
         self.lineEdit_passed.setReadOnly(True)
         self.lineEdit_Total.setReadOnly(True)
+        self.pushButton_SaveData.hide()
+        self.pushButton_Skip.hide()
     # retranslateUi
 
