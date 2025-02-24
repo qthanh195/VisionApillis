@@ -350,17 +350,17 @@ class Ui_Widget(object):
         self.frame_Cam1.setFrameShadow(QFrame.Shadow.Raised)
         self.label_Cam1 = QLabel(self.frame_Cam1)
         self.label_Cam1.setObjectName(u"label_Cam1")
-        self.label_Cam1.setGeometry(QRect(0, 0, 734, 447))
+        self.label_Cam1.setGeometry(QRect(3, 2, 728, 445))
         self.label_Cam1.setStyleSheet(u"QLabel {\n"
 "    border: 2px ;\n"
 "\n"
 "}")
         self.label_Status1 = QLabel(self.page_Operation)
         self.label_Status1.setObjectName(u"label_Status1")
-        self.label_Status1.setGeometry(QRect(53, 1017, 171, 51))
+        self.label_Status1.setGeometry(QRect(53, 1017, 1500, 51))
         font2 = QFont()
         font2.setFamilies([u"Arial"])
-        font2.setPointSize(24)
+        font2.setPointSize(18)
         self.label_Status1.setFont(font2)
         self.label_Status1.setStyleSheet(u"QLabel{\n"
 "	color: red;\n"
@@ -673,7 +673,7 @@ class Ui_Widget(object):
         self.lineEdit_Exposure.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_Status2 = QLabel(self.page_Calibration)
         self.label_Status2.setObjectName(u"label_Status2")
-        self.label_Status2.setGeometry(QRect(53, 1017, 171, 51))
+        self.label_Status2.setGeometry(QRect(53, 1017, 1500, 51))
         self.label_Status2.setFont(font2)
         self.label_Status2.setStyleSheet(u"QLabel{\n"
 "	color: green;\n"
@@ -780,11 +780,23 @@ class Ui_Widget(object):
         self.label_Time2.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_Cam2 = QLabel(self.page_Calibration)
         self.label_Cam2.setObjectName(u"label_Cam2")
-        self.label_Cam2.setGeometry(QRect(323, 66, 841, 509))
+        self.label_Cam2.setGeometry(QRect(323, 67, 840, 509))
         self.label_Cam2.setStyleSheet(u"QLabel {\n"
 "    border: 2px solid black ;\n"
 "\n"
 "}")
+        self.label_Time2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.frame_Cam2 = QFrame(self.page_Calibration)
+        self.frame_Cam2.setObjectName(u"frame_Cam2")
+        self.frame_Cam2.setGeometry(QRect(534, 111, 416, 416))
+        self.frame_Cam2.setStyleSheet(u"QFrame {\n"
+"    border: 2px solid green;\n"
+"	 border-radius: 3px;\n"
+"    background-color: transparent;\n"
+"}\n"
+"")
+        self.frame_Cam2.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_Cam2.setFrameShadow(QFrame.Shadow.Raised)
         self.stackedWidget_Page.addWidget(self.page_Calibration)
 
         self.retranslateUi(Widget)
@@ -813,22 +825,22 @@ class Ui_Widget(object):
         self.lineEdit_Total.setText(QCoreApplication.translate("Widget", u"0", None))
         self.lineEdit_Serial.setText(QCoreApplication.translate("Widget", u"0", None))
         self.label_Cam1.setText("")
-        self.label_Status1.setText(QCoreApplication.translate("Widget", u"Stop", None))
+        self.label_Status1.setText(QCoreApplication.translate("Widget", u"", None))
         self.label_PassFail.setText(QCoreApplication.translate("Widget", u"", None))
         self.pushButton_5.setText(QCoreApplication.translate("Widget", u"Operation", None))
         self.pushButton_Calibration.setText(QCoreApplication.translate("Widget", u"Calibration", None))
-        self.pushButton_DataLog1.setText(QCoreApplication.translate("Widget", u"Data Log", None))
+        self.pushButton_DataLog1.setText(QCoreApplication.translate("Widget", u"Export Data", None))
         self.label_Time1.setText(QCoreApplication.translate("Widget", u"", None))
         self.label_Time1.setText(QDate.currentDate().toString("yyyy - MM - dd"))
         self.pushButton_Measure.setText(QCoreApplication.translate("Widget", u"Measure", None))
-        self.pushButton_DataLog2.setText(QCoreApplication.translate("Widget", u"Data Log", None))
+        self.pushButton_DataLog2.setText(QCoreApplication.translate("Widget", u"Export Data", None))
         self.pushButton_Operation.setText(QCoreApplication.translate("Widget", u"Operation", None))
         self.pushButton_Calibration_2.setText(QCoreApplication.translate("Widget", u"Calibration", None))
         self.lineEdit_PixelFormat.setText(QCoreApplication.translate("Widget", u"Mono8", None))
-        self.lineEdit_ModeExposure.setText(QCoreApplication.translate("Widget", u"Once", None))
-        self.lineEdit_ModeBalance.setText(QCoreApplication.translate("Widget", u"Once", None))
+        self.lineEdit_ModeExposure.setText(QCoreApplication.translate("Widget", u"Continuous", None))
+        self.lineEdit_ModeBalance.setText(QCoreApplication.translate("Widget", u"Continuous", None))
         self.lineEdit_Exposure.setText(QCoreApplication.translate("Widget", u"", None))
-        self.label_Status2.setText(QCoreApplication.translate("Widget", u"Running...", None))
+        self.label_Status2.setText(QCoreApplication.translate("Widget", u"", None))
         self.lineEdit_Gain.setText(QCoreApplication.translate("Widget", u"", None))
         self.lineEdit_FrameRate.setText(QCoreApplication.translate("Widget", u"", None))
         self.pushButton_OpenCamera.setText(QCoreApplication.translate("Widget", u"Open Camera", None))
@@ -852,5 +864,6 @@ class Ui_Widget(object):
         self.lineEdit_Total.setReadOnly(True)
         self.pushButton_SaveData.hide()
         self.pushButton_Skip.hide()
+        self.frame_Cam2.hide()
     # retranslateUi
 

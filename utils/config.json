@@ -3,9 +3,9 @@
         {
             "thresh_bg": 220,
             "thresh_pp": 157,
-            "ratio": 0.08,
-            "topEdgeDistance": 1.5,
-            "sideEdgeDistance": 3.5,
+            "ratio": 0.08624200962052378,
+            "topEdgeDistance": 2.3,
+            "sideEdgeDistance": 4.5,
             "tolerance": 1.0
         }
     ],
@@ -13,7 +13,7 @@
         {
             "thresh_bg": 210,
             "thresh_pp": 155,
-            "ratio": 0.0921875,
+            "ratio": 0.083,
             "topEdgeDistance": 1.5,
             "sideEdgeDistance": 4.5,
             "tolerance": 2.0

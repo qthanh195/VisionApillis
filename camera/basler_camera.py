@@ -24,8 +24,8 @@ class BaslerCamera():
         """Thiết lập cấu hình camera."""
         
         self.camera.PixelFormat.Value = "Mono8" # Đặt định dạng pixel thành Mono8
-        self.camera.ExposureAuto.Value = "Once" ## Đặt chế độ tự động điều chỉnh độ sáng thành Once
-        self.camera.BalanceWhiteAuto.Value = "Once" # Đặt chế độ tự động điều chỉnh màu trắng thành Once
+        self.camera.ExposureAuto.Value = "Continuous" ## Đặt chế độ tự động điều chỉnh độ sáng thành Once
+        self.camera.BalanceWhiteAuto.Value = "Continuous" # Đặt chế độ tự động điều chỉnh màu trắng thành Once
         # self.print_camera_settings()
         
     def open_camera(self):

@@ -6,14 +6,18 @@ def create_database():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS measurements (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            date TEXT,
-            p1 REAL,
-            p2 REAL,
-            p3 REAL,
-            p4 REAL,
-            p5 REAL,
-            p6 REAL,
-            pass_fail TEXT
+                date TEXT,
+                serial_number TEXT,
+                top_edge REAL,
+                side_edge REAL,
+                tolerance REAL,
+                p1 REAL,
+                p2 REAL,
+                p3 REAL,
+                p4 REAL,
+                p5 REAL,
+                p6 REAL,
+                pass_fail TEXT
         )
     ''')
     conn.commit()

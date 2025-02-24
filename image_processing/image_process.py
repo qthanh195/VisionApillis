@@ -30,7 +30,7 @@ class ImageProcess:
         angle = self.calculate_angle(p1, p2)
         #Xoay anh
         rotated_image,matrix_rotate = self.rotate_image(image, 180 + angle) 
-        cv2.imwrite("new_img_2102.jpg", rotated_image)
+        # cv2.imwrite("new_img_2102.jpg", rotated_image)
         center_crop_befor = (abs(p1[0] - p2[0])//2+min(p1[0],p2[0]), abs(p1[1] - p2[1])//2+min(p1[1],p2[1]))
         center_crop_after = self.transform_point(center_crop_befor, matrix_rotate)
         # cv2.circle(rotated_image, center_crop_after, 20, (0, 0, 255), -1)
@@ -162,57 +162,35 @@ class ImageProcess:
         cnt1 = self.remove_contour(new_img_gray, thresh_bg, 6000000, 7200000) # tách nền
         cnt2 = self.remove_contour(new_img_gray, thresh_pp, 5500000, 7200000) # Tách giấy và kim loại
         
-        # cv2.line(new_img, (x1, 0), (x1, h), color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
-        # cv2.line(new_img, (x2, 0), (x2, h), color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
-        # cv2.line(new_img, (0, y1), (w, y1), color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
-        # cv2.line(new_img, (0, y2), (w, y2), color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
-        # cv2.drawContours(new_img, [cnt1], -1, (0, 255, 0), -1)
-        # cv2.drawContours(new_img, [cnt2], -1, (0, 255, 0), -1)
-        
-        
-        
-        
         if cnt1 is not None and cnt2 is not None:
-            # cv2.imwrite("./Image/test222.jpg", self.new_img)
-            # time.sleep(1)
             # pos 1
             p1_1 = self.find_extreme_point(cnt1, axis="x", extreme_type="min", value=x2)
             p1_2 = self.find_extreme_point(cnt2, axis="x", extreme_type="min", value=x2)
             p1 = self.distance_tow_point(p1_1, p1_2)
-            # self.draw_dimension(self.new_img, p1_1, p1_2)
-            
             # pos 2
             p2_1 = self.find_extreme_point(cnt1, axis="x", extreme_type="min", value=x1)
             p2_2 = self.find_extreme_point(cnt2, axis="x", extreme_type="min", value=x1)
             p2 = self.distance_tow_point(p2_1, p2_2)
-            # self.draw_dimension(self.new_img, p2_1, p2_2)
-            # time.sleep(1)
 
             # pos 3
             p3_1 = self.find_extreme_point(cnt1, axis="y", extreme_type="max", value=y2)
             p3_2 = self.find_extreme_point(cnt2, axis="y", extreme_type="max", value=y2)
             p3 = self.distance_tow_point(p3_1, p3_2)
-            # self.draw_dimension(self.new_img, p3_1, p3_2)
-
             # pos 4
             p4_1 = self.find_extreme_point(cnt1, axis="y", extreme_type="max", value=y1)
             p4_2 = self.find_extreme_point(cnt2, axis="y", extreme_type="max", value=y1)
             p4 = self.distance_tow_point(p4_1, p4_2)
-            # self.draw_dimension(self.new_img, p4_1, p4_2)
-
             # pos 5
             p5_1 = self.find_extreme_point(cnt1, axis="y", extreme_type="min", value=y2)
             p5_2 = self.find_extreme_point(cnt2, axis="y", extreme_type="min", value=y2)
             p5 = self.distance_tow_point(p5_1, p5_2)
-            # self.draw_dimension(self.new_img, p5_1, p5_2)
-
             # pos 6
             p6_1 = self.find_extreme_point(cnt1, axis="y", extreme_type="min", value=y1)
             p6_2 = self.find_extreme_point(cnt2, axis="y", extreme_type="min", value=y1)
             p6 = self.distance_tow_point(p6_1, p6_2)
             # self.draw_dimension(self.new_img, p6_1, p6_2)
             print("Done")
-            # cv2.imwrite("showcheck.jpg", self.new_img)
+            # cv2.imwrite("showcheck.jpg", new_img)
             
             return new_img, p1, p2, p3, p4, p5, p6
 
@@ -221,6 +199,7 @@ class ImageProcess:
         Tính khoảng cách giữa hai điểm.
         """
         # print("ratio", (np.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)))
+        print("ratiooooooooo", ratio)
         
         return (np.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)) * ratio
     
@@ -250,3 +229,9 @@ class ImageProcess:
         if  agl < -3 or agl > 3:
             return False
         return True
+
+    def update_ratio(self, new_ratio):
+        """Cập nhật giá trị ratio mới."""
+        global ratio
+        ratio = new_ratio
+        print(f"Updated ratio tại processs: {ratio}")
