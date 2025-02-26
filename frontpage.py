@@ -38,21 +38,21 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.ui.lineEdit_Top.editingFinished.connect(self.save_new_top_edge)
         self.ui.lineEdit_Side.editingFinished.connect(self.save_new_side_edge)
         self.ui.lineEdit_Tolerance.editingFinished.connect(self.save_new_tolerance)
+        self.ui.lineEdit_Serial.editingFinished.connect(self.save_new_serial)
         
-        #Update the total tested and passed
         self.update_total_tested_and_passed()
         # Update the part number
         self.update_part_number()
 
     def update_part_number(self):
         """Cập nhật số phần tử."""
+        #Update the total tested and passed
+        
         self.ui.lineEdit_Total.setText(str(self.total_tested))
         self.ui.lineEdit_passed.setText(str(self.total_passed))
-        if self.total_tested > 9999:
-            serial_number = str(self.total_tested+1)
-        else:
-            serial_number = f"{self.total_tested+1:04d}"
-        self.ui.lineEdit_Serial.setText(serial_number)
+        if int(self.serial_number) <= 999:
+            self.serial_number = f"{int(self.serial_number):04d}"
+        self.ui.lineEdit_Serial.setText(self.serial_number)
         
     def update_status(self, message, color="blue"):
         """Cập nhật trạng thái hệ thống."""
@@ -90,12 +90,11 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
             self.ui.pushButton_Measure.setText("Measure")
             self.update_status("Measurement completed.", "green")
         else:
-            self.update_status("Sai khung hình.", "red")
+            self.update_status("The object is not in the frame.", "red")
 
     def buton_skip(self):
         """Ignore and continue mode continuous."""
         self.remeasure()
-        self.update_status("Measurement skipped.", "orange")
 
     def button_save_data(self):
         """Save the data."""
@@ -123,7 +122,7 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.ui.lineEdit_P4.setText(f"")
         self.ui.lineEdit_P5.setText(f"")
         self.ui.lineEdit_P6.setText(f"")
-        self.update_status("Ready for remeasurement.", "green")
+        self.update_status("Ready for measure.", "green")
 
     def button_start_stop(self):
         if not self.trigger_start:
@@ -147,6 +146,10 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.continuousStart()
         self.ui.pushButton_Start.setText("Stop")
         self.ui.pushButton_OpenCamera.setText("Stop Camera")
+        #Khong cho nhan nhap du lieu
+        self.ui.lineEdit_Top.setReadOnly(True)
+        self.ui.lineEdit_Side.setReadOnly(True)
+        self.ui.lineEdit_Tolerance.setReadOnly(True)
 
     def stop(self):
         # stop chup cam lieen tuc
@@ -169,12 +172,15 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.ui.lineEdit_P5.setText(f"")
         self.ui.lineEdit_P6.setText(f"")
         self.ui.frame_Cam2.hide()
+        # Cho nhan nhap du lieu
+        self.ui.lineEdit_Top.setReadOnly(False)
+        self.ui.lineEdit_Side.setReadOnly(False)
+        self.ui.lineEdit_Tolerance.setReadOnly(False)
 
     def button_openCamera(self):
         self.ui.frame_Cam2.show()
         self.button_start_stop()
         
-
     def button_startCalibration(self):
         """Check the dimension of the object."""
         if not self.camera.is_open:
@@ -205,7 +211,7 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
     def closeEvent(self, event):
         """Xử lý sự kiện đóng cửa sổ."""
         reply = QMessageBox.question(self, 'Message',
-                                     "Bạn có chắc chắn muốn thoát?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+                                     "Are you sure you want to exit?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
             if self.camera.is_open:
@@ -278,6 +284,10 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         tolerance = abs(float(self.ui.lineEdit_Tolerance.text()))
         self.ui.lineEdit_Tolerance.setText(f"{tolerance:.2f}")
         save_config("tolerance", tolerance)
+        
+    def save_new_serial(self):
+        self.serial_number = self.ui.lineEdit_Serial.text()
+        self.update_part_number()
 
     def save_new_ratio(self, ratio):
         self.update_ratio(ratio)
@@ -294,7 +304,7 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
     def save_data(self):
         """Save the data."""
         # Lấy ngày hiện tại
-        current_date = QDate.currentDate().toString("yyyy_MM_dd")
+        current_date ="Test1" # QDate.currentDate().toString("yyyy_MM_dd")
 
         # Tên bảng dựa trên ngày hiện tại
         table_name = f"measurements_{current_date}"
@@ -362,7 +372,10 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
     
     def update_total_tested_and_passed(self):
         """Cập nhật tổng số vật đã kiểm tra và số vật đạt yêu cầu."""
-        current_date = QDate.currentDate().toString("yyyy_MM_dd")
+        self.total_tested = 0
+        self.total_passed = 0
+        self.serial_number = 0
+        current_date = "Test1" #QDate.currentDate().toString("yyyy_MM_dd")
         table_name = f"measurements_{current_date}"
 
         try:
@@ -372,12 +385,18 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
             self.total_tested = cursor.fetchone()[0]
             cursor.execute(f"SELECT COUNT(*) FROM {table_name} WHERE pass_fail = 'Pass'")
             self.total_passed = cursor.fetchone()[0]
+            cursor.execute(f"SELECT serial_number FROM {table_name} ORDER BY id DESC LIMIT 1")
+            result = cursor.fetchone()
+            if result:
+                self.serial_number = result[0]
+            else:
+                self.serial_number = 0
             conn.close()
 
             # self.ui.lineEdit_TotalTested.setText(str(total_tested))
             # self.ui.lineEdit_TotalPassed.setText(str(total_passed))
         except Exception as e:
-            self.update_status(f"Error updating total tested and passed: {e}", "red")
+            print(f"Error updating total tested and passed: {e}")
 
     def show_data_log(self):
         """Hiển thị danh sách các ngày có dữ liệu."""
@@ -390,7 +409,7 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
 
             # Hiển thị danh sách các bảng (ngày) cho người dùng chọn
             dates = [table[0].replace("measurements_", "") for table in tables]
-            date, ok = QInputDialog.getItem(self, "Select data", "Date:", dates, 0, False)
+            date, ok = QInputDialog.getItem(self, "Export data", "Date:", dates, 0, False)
             if ok and date:
                 self.export_data_to_excel(date)
         except Exception as e:
