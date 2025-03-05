@@ -82,7 +82,7 @@ class ImageProcess:
         img = cv2.blur(new_img_gray, (5, 5), 2)
         _, thresh = cv2.threshold(img, threshold_value, 255, cv2.THRESH_BINARY)
         thresh = cv2.blur(thresh, (3, 3), 2)
-        cv2.imwrite("test1.jpg", thresh)
+        # cv2.imwrite("test1.jpg", thresh)
         contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
         for cnt in contours:
             area = cv2.contourArea(cnt)
@@ -165,7 +165,7 @@ class ImageProcess:
         cnt2 = self.remove_contour(new_img_gray, thresh_pp, 5500000, 7200000) # Tách giấy và kim loại
         # cv2.drawContours(new_img, [cnt1], -1, (0, 255, 0), 2)
         # cv2.drawContours(new_img, [cnt2], -1, (0, 255, 0), 2)
-        cv2.imwrite("thresh.jpg", new_img)
+        # cv2.imwrite("thresh.jpg", new_img)
         if cnt1 is not None and cnt2 is not None:
             # pos 1
             p1_1 = self.find_extreme_point(cnt1, axis="x", extreme_type="min", value=x2)

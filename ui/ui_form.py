@@ -16,7 +16,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QLineEdit,
-    QPushButton, QSizePolicy, QStackedWidget, QWidget)
+    QPushButton, QSizePolicy, QStackedWidget, QWidget, QCheckBox)
 
 from utils.config import topEdgeDistance, sideEdgeDistance,tolerance
 
@@ -72,6 +72,15 @@ class Ui_Widget(object):
 "    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);\n"
 "    transform: translateY(2px);\n"
 "}")
+        # Add QCheckBox for mode save data
+        self.checkBox_ModeSaveData = QCheckBox(self.page_Operation)
+        self.checkBox_ModeSaveData.setObjectName(u"checkBox_ModeSaveData")
+        self.checkBox_ModeSaveData.setGeometry(QRect(1360, 1000, 200, 30))
+        self.checkBox_ModeSaveData.setStyleSheet(u"QCheckBox {\n"
+    "    font-size: 16px;\n"
+"}\n"
+"")
+        self.checkBox_ModeSaveData.setText(QCoreApplication.translate("Widget", u"Auto Save Data", None))
         self.pushButton_Skip = QPushButton(self.page_Operation)
         self.pushButton_Skip.setObjectName(u"pushButton_Skip")
         self.pushButton_Skip.setEnabled(True)
@@ -795,6 +804,7 @@ class Ui_Widget(object):
 "    background-color: transparent;\n"
 "}\n"
 "")
+        
         self.frame_Cam2.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_Cam2.setFrameShadow(QFrame.Shadow.Raised)
         self.stackedWidget_Page.addWidget(self.page_Calibration)
@@ -843,8 +853,8 @@ class Ui_Widget(object):
         self.label_Status2.setText(QCoreApplication.translate("Widget", u"", None))
         self.lineEdit_Gain.setText(QCoreApplication.translate("Widget", u"", None))
         self.lineEdit_FrameRate.setText(QCoreApplication.translate("Widget", u"", None))
-        self.pushButton_OpenCamera.setText(QCoreApplication.translate("Widget", u"Open Camera", None))
-        self.pushButton_StartCalibration.setText(QCoreApplication.translate("Widget", u"Start Calibration", None))
+        self.pushButton_OpenCamera.setText(QCoreApplication.translate("Widget", u"Calibration", None))
+        self.pushButton_StartCalibration.setText(QCoreApplication.translate("Widget", u"Save config", None))
         self.label_Time2.setText(QCoreApplication.translate("Widget", u"", None))
         self.label_Time2.setText(QDate.currentDate().toString("yyyy - MM - dd"))
         self.label_Cam2.setText("")

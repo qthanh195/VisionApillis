@@ -15,7 +15,7 @@ class Calibration:
         
         for cnt in contours:
             area = cv2.contourArea(cnt)
-            print(area)
+            # print(area)
             if 3450000 < area < 3550000:
                 print(area)
                 return cnt, True

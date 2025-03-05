@@ -20,6 +20,7 @@ class BaslerCamera(Calibration):
         self.grab_thread = None
         self.image_camera_basler = None
         self.ui_widget = ui_widget
+        self.triggerCalibration = False
 
     def setup_camera(self):
         """Thiết lập cấu hình camera."""
@@ -92,8 +93,13 @@ class BaslerCamera(Calibration):
                             self.image_camera_basler = grab_result.Array
                             self.displayCamera()
                             count_frame += 1
-                            if count_frame % 16 == 0:
-                                self.check_position()
+                            if count_frame % 10 == 0:
+                                if self.triggerCalibration:
+                                    self.checkClibration()
+                                    # print("Đã trigger calibration")
+                                else:
+                                    self.check_position()
+                                    # print("Đã trigger position")
                             key = cv2.waitKey(1) & 0xFF
                             if key == ord('q'):
                                 break
@@ -127,15 +133,16 @@ class BaslerCamera(Calibration):
         """Lấy thông tin camera."""
         if not self.is_open:
             print("Camera chưa được mở.")
-            return
+            return None
 
         try:
-            exposure_time = self.camera.ExposureTime.Value
-            gain =  self.camera.Gain.Value
-            frame_rate = self.camera.AcquisitionFrameRate.Value
-            return  exposure_time, gain, frame_rate
+            exposure_time = self.camera.ExposureTime.Value if self.camera.ExposureTime.IsReadable else None
+            gain = self.camera.Gain.Value if self.camera.Gain.IsReadable else None
+            frame_rate = self.camera.AcquisitionFrameRate.Value if self.camera.AcquisitionFrameRate.IsReadable else None
+            return exposure_time, gain, frame_rate
         except Exception as e:
             print(f"Lỗi khi lấy thông tin camera: {e}")
+            return None
             
     def print_camera_settings(self):
         """In ra các thông số của camera."""
@@ -153,8 +160,23 @@ class BaslerCamera(Calibration):
         triggler_capture = ImageProcess().detect_object(self.image_camera_basler)
         if triggler_capture:
             self.ui_widget.frame_Cam1.setStyleSheet("border: 3px solid green;")
+            self.ui_widget.label_Status1.setText("Ready to measure")
+            self.ui_widget.label_Status1.setStyleSheet(f"color: green;")
         else:
             self.ui_widget.frame_Cam1.setStyleSheet("border: 3px solid red;")
+            self.ui_widget.label_Status1.setText("Out of range")
+            self.ui_widget.label_Status1.setStyleSheet(f"color: red;")
+            
+    def checkClibration(self):
+        _, triggerSquare = self.detect_square(self.image_camera_basler)
+        if triggerSquare:
+            self.ui_widget.frame_Cam2.setStyleSheet("border: 3px solid green;")
+            self.ui_widget.label_Status2.setText("Ready to Calibration")
+            self.ui_widget.label_Status2.setStyleSheet(f"color: green;")
+        else:
+            self.ui_widget.frame_Cam2.setStyleSheet("border: 3px solid red;")
+            self.ui_widget.label_Status2.setText("Not ready to Calibration")
+            self.ui_widget.label_Status2.setStyleSheet(f"color: red;")
             
     def displayCamera(self):
         image,_ = ImageProcess().rotate_image(self.image_camera_basler, 180)
@@ -199,8 +221,4 @@ class BaslerCamera(Calibration):
         self.ui_widget.label_Cam1.setPixmap(scaled_pixmap1)
         self.ui_widget.label_Cam2.setPixmap(scaled_pixmap2)
         
-        # _, triggerSquare = self.detect_square(self.image_camera_basler)
-        # if triggerSquare:
-        #     self.ui_widget.frame_Cam.setStyleSheet("border: 3px solid green;")
-        # else:
-        #     self.ui_widget.frame_Cam.setStyleSheet("border: 3px solid red;")
+        

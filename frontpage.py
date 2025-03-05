@@ -1,5 +1,5 @@
-from PySide6.QtCore import Qt, QCoreApplication, QTextStream, QDate
-from PySide6.QtWidgets import QMainWindow, QMenu, QWidget, QApplication, QMessageBox, QFileDialog, QInputDialog, QLabel
+from PySide6.QtCore import Qt, QCoreApplication, QTextStream, QDate, QTimer, QRect
+from PySide6.QtWidgets import QMainWindow, QMenu, QWidget, QApplication, QMessageBox, QFileDialog, QInputDialog, QLabel, QCheckBox
 from PySide6.QtGui import QAction, QImage, QPixmap
 from ui.ui_form import Ui_Widget
 from camera.basler_camera import BaslerCamera
@@ -22,8 +22,12 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.camera = BaslerCamera(self.ui)
         self.timer_thread = None
         self.trigger_start = False
-        self.triggerModeSaveData = False # false: manual, true: auto
-
+        self.triggerModeSaveData = True # false: manual, true: auto
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.remeasure)
+        
+        self.ui.checkBox_ModeSaveData.stateChanged.connect(self.toggle_mode_save_data)
+        
         self.ui.pushButton_Calibration.clicked.connect(self.btn_ScreenCalibration)
         self.ui.pushButton_Operation.clicked.connect(self.btn_ScreenOperation)
         self.ui.pushButton_DataLog1.clicked.connect(self.btn_DataLog)
@@ -32,6 +36,7 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.ui.pushButton_Start.clicked.connect(self.button_start_stop)
         self.ui.pushButton_Skip.clicked.connect(self.buton_skip)
         self.ui.pushButton_SaveData.clicked.connect(self.button_save_data)
+        
         self.ui.pushButton_OpenCamera.clicked.connect(self.button_openCamera)
         self.ui.pushButton_StartCalibration.clicked.connect(self.button_startCalibration)
         self.ui.pushButton_Measure.clicked.connect(self.button_measure)
@@ -64,12 +69,15 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
 
     def btn_ScreenOperation(self):
         self.ui.stackedWidget_Page.setCurrentIndex(0)
+        self.stop()
 
     def btn_ScreenCalibration(self):
         self.ui.stackedWidget_Page.setCurrentIndex(1)
+        self.stop()
 
     def btn_DataLog(self):
         self.show_data_log()
+        self.stop()
 
     def button_measure(self):
         """Check the dimension of the object."""
@@ -109,6 +117,7 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         
     def remeasure(self):
         """Remeasure the object."""
+        self.timer.stop()
         if not self.camera.is_open:
             self.camera.open_camera()
         self.continuousStart()
@@ -127,12 +136,8 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
     def button_start_stop(self):
         if not self.trigger_start:
             self.start()
-            self.trigger_start = True
-            self.update_status("Camera started.", "green")
         else:
             self.stop()
-            self.trigger_start = False
-            self.update_status("Camera stopped.", "red")
 
     def start(self):
         # open camera
@@ -150,6 +155,8 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.ui.lineEdit_Top.setReadOnly(True)
         self.ui.lineEdit_Side.setReadOnly(True)
         self.ui.lineEdit_Tolerance.setReadOnly(True)
+        self.trigger_start = True
+        self.update_status("Camera started.", "green")
 
     def stop(self):
         # stop chup cam lieen tuc
@@ -176,9 +183,13 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.ui.lineEdit_Top.setReadOnly(False)
         self.ui.lineEdit_Side.setReadOnly(False)
         self.ui.lineEdit_Tolerance.setReadOnly(False)
+        self.camera.triggerCalibration = False
+        self.trigger_start = False
+        self.update_status("Camera stopped.", "red")
 
     def button_openCamera(self):
         self.ui.frame_Cam2.show()
+        self.camera.triggerCalibration = True
         self.button_start_stop()
         
     def button_startCalibration(self):
@@ -198,6 +209,7 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
             self.save_new_ratio(ratio)
             self.button_start_stop()
             self.update_status(message, "green")
+            self.camera.triggerCalibration = False
 
     def continuousStop(self):
         self.camera.stop_continuous_grabbing()
@@ -299,9 +311,12 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         camera_info = self.camera.get_camera_info()
         if camera_info:
             exposure_time, gain, frame_rate = camera_info
-            self.ui.lineEdit_Exposure.setText(f"{exposure_time:.0f}")
-            self.ui.lineEdit_Gain.setText(f"{gain:.1f}")
-            self.ui.lineEdit_FrameRate.setText(f"{frame_rate:.0f}")
+            if exposure_time is not None:
+                self.ui.lineEdit_Exposure.setText(f"{exposure_time:.0f}")
+            if gain is not None:
+                self.ui.lineEdit_Gain.setText(f"{gain:.1f}")
+            if frame_rate is not None:
+                self.ui.lineEdit_FrameRate.setText(f"{frame_rate:.0f}")
         else:
             self.update_status("Failed to get camera info.", "red")
 
@@ -413,6 +428,8 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
 
             # Hiển thị danh sách các bảng (ngày) cho người dùng chọn
             dates = [table[0].replace("measurements_", "") for table in tables]
+            # Sắp xếp danh sách theo thứ tự từ mới nhất đến cũ nhất
+            dates.sort(reverse=True)
             date, ok = QInputDialog.getItem(self, "Export data", "Date:", dates, 0, False)
             if ok and date:
                 self.export_data_to_excel(date)
@@ -441,8 +458,9 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
     def mode_save_auto(self):
         """Lưu cài đặt tự động."""
         self.update_status("Measuring...", "green")
-        time.sleep(2)
         self.button_save_data()
+        print("Mode save auto")
+        self.timer.start(5000)
         
     def mode_save_manual(self):
         """Lưu cài đặt tay động."""
@@ -451,3 +469,10 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.ui.pushButton_SaveData.show()
         self.update_status("Measurement completed.", "green")
     
+    def toggle_mode_save_data(self):
+        """Chuyển đổi chế độ lưu dữ liệu."""
+        self.triggerModeSaveData = self.ui.checkBox_ModeSaveData.isChecked()
+        if self.triggerModeSaveData:
+            self.update_status("Auto save data", "green")
+        else:
+            self.update_status("Manual save data", "green")
