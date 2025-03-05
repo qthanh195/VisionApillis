@@ -72,15 +72,15 @@ class Ui_Widget(object):
 "    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);\n"
 "    transform: translateY(2px);\n"
 "}")
-        # Add QCheckBox for mode save data
+        # Thêm QCheckBox cho chế độ lưu dữ liệu
         self.checkBox_ModeSaveData = QCheckBox(self.page_Operation)
         self.checkBox_ModeSaveData.setObjectName(u"checkBox_ModeSaveData")
         self.checkBox_ModeSaveData.setGeometry(QRect(1360, 1000, 200, 30))
+        self.checkBox_ModeSaveData.setText(QCoreApplication.translate("Widget", u"Auto Save Data", None))
         self.checkBox_ModeSaveData.setStyleSheet(u"QCheckBox {\n"
     "    font-size: 16px;\n"
 "}\n"
 "")
-        self.checkBox_ModeSaveData.setText(QCoreApplication.translate("Widget", u"Auto Save Data", None))
         self.pushButton_Skip = QPushButton(self.page_Operation)
         self.pushButton_Skip.setObjectName(u"pushButton_Skip")
         self.pushButton_Skip.setEnabled(True)

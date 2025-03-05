@@ -22,11 +22,11 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.camera = BaslerCamera(self.ui)
         self.timer_thread = None
         self.trigger_start = False
-        self.triggerModeSaveData = True # false: manual, true: auto
+        self.triggerModeSaveData = False # false: manual, true: auto
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.remeasure)
         
-        self.ui.checkBox_ModeSaveData.stateChanged.connect(self.toggle_mode_save_data)
+        self.checkBox_ModeSaveData.stateChanged.connect(print("checkBox_ModeSaveData"))
         
         self.ui.pushButton_Calibration.clicked.connect(self.btn_ScreenCalibration)
         self.ui.pushButton_Operation.clicked.connect(self.btn_ScreenOperation)
@@ -471,7 +471,8 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
     
     def toggle_mode_save_data(self):
         """Chuyển đổi chế độ lưu dữ liệu."""
-        self.triggerModeSaveData = self.ui.checkBox_ModeSaveData.isChecked()
+        print("toggle_mode_save_data")
+        self.triggerModeSaveData = self.checkBox_ModeSaveData.isChecked()
         if self.triggerModeSaveData:
             self.update_status("Auto save data", "green")
         else:
