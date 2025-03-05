@@ -40,7 +40,7 @@ class Ui_Widget(object):
         self.pushButton_Start = QPushButton(self.page_Operation)
         self.pushButton_Start.setObjectName(u"pushButton_Start")
         self.pushButton_Start.setEnabled(True)
-        self.pushButton_Start.setGeometry(QRect(320, 950, 301, 71))
+        self.pushButton_Start.setGeometry(QRect(320, 910, 301, 71))
         font = QFont()
         font.setFamilies([u"Arial"])
         font.setBold(False)
@@ -84,7 +84,7 @@ class Ui_Widget(object):
         self.pushButton_Skip = QPushButton(self.page_Operation)
         self.pushButton_Skip.setObjectName(u"pushButton_Skip")
         self.pushButton_Skip.setEnabled(True)
-        self.pushButton_Skip.setGeometry(QRect(766, 950, 250, 71))
+        self.pushButton_Skip.setGeometry(QRect(766, 910, 250, 71))
         self.pushButton_Skip.setFont(font)
         self.pushButton_Skip.setStyleSheet(u"QPushButton {\n"
 "    background-color: #3498db;\n"
@@ -113,7 +113,7 @@ class Ui_Widget(object):
         self.pushButton_SaveData = QPushButton(self.page_Operation)
         self.pushButton_SaveData.setObjectName(u"pushButton_SaveData")
         self.pushButton_SaveData.setEnabled(True)
-        self.pushButton_SaveData.setGeometry(QRect(1166, 950, 250, 71))
+        self.pushButton_SaveData.setGeometry(QRect(1166, 910, 250, 71))
         self.pushButton_SaveData.setFont(font)
         self.pushButton_SaveData.setStyleSheet(u"QPushButton {\n"
 "    background-color: #3498db;\n"
@@ -366,7 +366,7 @@ class Ui_Widget(object):
 "}")
         self.label_Status1 = QLabel(self.page_Operation)
         self.label_Status1.setObjectName(u"label_Status1")
-        self.label_Status1.setGeometry(QRect(53, 1017, 1500, 51))
+        self.label_Status1.setGeometry(QRect(53, 979, 1500, 51))
         font2 = QFont()
         font2.setFamilies([u"Arial"])
         font2.setPointSize(18)
@@ -488,7 +488,7 @@ class Ui_Widget(object):
         self.pushButton_Measure = QPushButton(self.page_Operation)
         self.pushButton_Measure.setObjectName(u"pushButton_Measure")
         self.pushButton_Measure.setEnabled(True)
-        self.pushButton_Measure.setGeometry(QRect(994, 950, 301, 71))
+        self.pushButton_Measure.setGeometry(QRect(994, 910, 301, 71))
         self.pushButton_Measure.setFont(font)
         self.pushButton_Measure.setStyleSheet(u"QPushButton {\n"
 "    background-color: #3498db;\n"
@@ -682,7 +682,7 @@ class Ui_Widget(object):
         self.lineEdit_Exposure.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_Status2 = QLabel(self.page_Calibration)
         self.label_Status2.setObjectName(u"label_Status2")
-        self.label_Status2.setGeometry(QRect(53, 1017, 1500, 51))
+        self.label_Status2.setGeometry(QRect(53, 979, 1500, 51))
         self.label_Status2.setFont(font2)
         self.label_Status2.setStyleSheet(u"QLabel{\n"
 "	color: green;\n"
@@ -724,7 +724,7 @@ class Ui_Widget(object):
         self.pushButton_OpenCamera = QPushButton(self.page_Calibration)
         self.pushButton_OpenCamera.setObjectName(u"pushButton_OpenCamera")
         self.pushButton_OpenCamera.setEnabled(True)
-        self.pushButton_OpenCamera.setGeometry(QRect(291, 923, 297, 71))
+        self.pushButton_OpenCamera.setGeometry(QRect(291, 910, 297, 71))
         self.pushButton_OpenCamera.setFont(font)
         self.pushButton_OpenCamera.setStyleSheet(u"QPushButton {\n"
 "    background-color: #3498db;\n"
@@ -753,7 +753,7 @@ class Ui_Widget(object):
         self.pushButton_StartCalibration = QPushButton(self.page_Calibration)
         self.pushButton_StartCalibration.setObjectName(u"pushButton_StartCalibration")
         self.pushButton_StartCalibration.setEnabled(True)
-        self.pushButton_StartCalibration.setGeometry(QRect(897, 923, 297, 71))
+        self.pushButton_StartCalibration.setGeometry(QRect(897, 910, 297, 71))
         self.pushButton_StartCalibration.setFont(font)
         self.pushButton_StartCalibration.setStyleSheet(u"QPushButton {\n"
 "    background-color: #3498db;\n"
