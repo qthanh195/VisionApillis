@@ -22,6 +22,7 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         self.camera = BaslerCamera(self.ui)
         self.timer_thread = None
         self.trigger_start = False
+        self.triggerModeSaveData = False # false: manual, true: auto
 
         self.ui.pushButton_Calibration.clicked.connect(self.btn_ScreenCalibration)
         self.ui.pushButton_Operation.clicked.connect(self.btn_ScreenOperation)
@@ -82,12 +83,11 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         if triggler_test:
             self.continuousStop()
             self.camera.close_camera()
-            # cv2.imwrite("image.jpg", self.camera.image_camera_basler)
             self.check_pass_fail(self.camera.image_camera_basler)
-            self.ui.pushButton_Measure.hide()
-            self.ui.pushButton_Skip.show()
-            self.ui.pushButton_SaveData.show()
-            self.ui.pushButton_Measure.setText("Measure")
+            if self.triggerModeSaveData:
+                self.mode_save_auto()
+            else:
+                self.mode_save_manual()
             self.update_status("Measurement completed.", "green")
         else:
             self.update_status("The object is not in the frame.", "red")
@@ -284,7 +284,7 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
         tolerance = abs(float(self.ui.lineEdit_Tolerance.text()))
         self.ui.lineEdit_Tolerance.setText(f"{tolerance:.2f}")
         save_config("tolerance", tolerance)
-        
+          
     def save_new_serial(self):
         self.serial_number = self.ui.lineEdit_Serial.text()
         self.update_part_number()
@@ -296,15 +296,19 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
     def reload_config_values(self):
         global thresh_bg, thresh_pp, ratio, topEdgeDistance, sideEdgeDistance, tolerance
         thresh_bg, thresh_pp, ratio, topEdgeDistance, sideEdgeDistance, tolerance = load_config()
-        exposure_time, gain, frame_rate = self.camera.get_camera_info()
-        self.ui.lineEdit_Exposure.setText(f"{exposure_time:.0f}")
-        self.ui.lineEdit_Gain.setText(f"{gain:.1f}")
-        self.ui.lineEdit_FrameRate.setText(f"{frame_rate:.0f}")
+        camera_info = self.camera.get_camera_info()
+        if camera_info:
+            exposure_time, gain, frame_rate = camera_info
+            self.ui.lineEdit_Exposure.setText(f"{exposure_time:.0f}")
+            self.ui.lineEdit_Gain.setText(f"{gain:.1f}")
+            self.ui.lineEdit_FrameRate.setText(f"{frame_rate:.0f}")
+        else:
+            self.update_status("Failed to get camera info.", "red")
 
-    def save_data(self):
+    def save_data(self): 
         """Save the data."""
         # Lấy ngày hiện tại
-        current_date ="Test1" # QDate.currentDate().toString("yyyy_MM_dd")
+        current_date = QDate.currentDate().toString("yyyy_MM_dd")
 
         # Tên bảng dựa trên ngày hiện tại
         table_name = f"measurements_{current_date}"
@@ -433,3 +437,17 @@ class MySideBar(QMainWindow, Ui_Widget, BaslerCamera, ImageProcess, Calibration)
                 self.update_status(f"Data exported to {file_name}", "green")
         except Exception as e:
             self.update_status(f"Error exporting data to Excel: {e}", "red")
+            
+    def mode_save_auto(self):
+        """Lưu cài đặt tự động."""
+        self.update_status("Measuring...", "green")
+        time.sleep(2)
+        self.button_save_data()
+        
+    def mode_save_manual(self):
+        """Lưu cài đặt tay động."""
+        self.ui.pushButton_Measure.hide()
+        self.ui.pushButton_Skip.show()
+        self.ui.pushButton_SaveData.show()
+        self.update_status("Measurement completed.", "green")
+    

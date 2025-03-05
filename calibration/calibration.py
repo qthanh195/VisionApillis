@@ -9,19 +9,21 @@ class Calibration:
         else:
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         gray = cv2.GaussianBlur(gray, (5, 5), 0)
-        _, thresh = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)
+        _, thresh = cv2.threshold(gray, 149, 255, cv2.THRESH_BINARY)
         thresh = cv2.blur(thresh, (3, 3), 2)
         contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+        
         for cnt in contours:
             area = cv2.contourArea(cnt)
+            print(area)
             if 3450000 < area < 3550000:
                 print(area)
-                return cnt
-        return None
+                return cnt, True
+        return None, False
     
     def calibrate(self, image):
         """ Calibrate the camera using the image of the calibration pattern."""
-        cnt = self.detect_square(image)
+        cnt,_ = self.detect_square(image)
         if cnt is None:
             message = "Calibration failed. The camera distance is incorrect."
             return None, message

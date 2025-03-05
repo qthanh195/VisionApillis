@@ -9,9 +9,10 @@ from image_processing.image_process import ImageProcess
 from ui.ui_form import Ui_Widget
 from PySide6.QtGui import QAction, QImage,QPixmap
 from PySide6.QtCore import Qt, QCoreApplication, QTextStream, QDate
+from calibration.calibration import Calibration
 
         
-class BaslerCamera():
+class BaslerCamera(Calibration):
     def __init__(self, ui_widget):
         self.camera = None
         self.is_open = False
@@ -80,25 +81,33 @@ class BaslerCamera():
 
         def grab_images():
             count_frame = 0
-            self.camera.StartGrabbing(pylon.GrabStrategy_LatestImageOnly)
-            while self.is_continuous:
-                grab_result = self.camera.RetrieveResult(490, pylon.TimeoutHandling_ThrowException)
+            try:
+                self.camera.StartGrabbing(pylon.GrabStrategy_LatestImageOnly)
+                while self.is_continuous:
+                    try:
+                        grab_result = self.camera.RetrieveResult(490, pylon.TimeoutHandling_ThrowException)
 
-                if grab_result.GrabSucceeded():
-                    # Chuyển đổi hình ảnh sang định dạng OpenCV
-                    self.image_camera_basler = grab_result.Array
-                    self.displayCamera()
-                    count_frame += 1
-                    if count_frame % 16 == 0:
-                        self.check_position()
-                    key = cv2.waitKey(1) & 0xFF
-                    if key == ord('q'):
+                        if grab_result.GrabSucceeded():
+                            # Chuyển đổi hình ảnh sang định dạng OpenCV
+                            self.image_camera_basler = grab_result.Array
+                            self.displayCamera()
+                            count_frame += 1
+                            if count_frame % 16 == 0:
+                                self.check_position()
+                            key = cv2.waitKey(1) & 0xFF
+                            if key == ord('q'):
+                                break
+                        grab_result.Release()
+                    except pylon.TimeoutException as e:
+                        print(f"Lỗi timeout khi lấy khung hình: {e}")
+                        self.update_status(f"Lỗi timeout khi lấy khung hình: {e}", "red")
                         break
-                    
-                grab_result.Release()
-
-            self.camera.StopGrabbing()
-            cv2.destroyAllWindows()
+            except Exception as e:
+                print(f"Lỗi khi bắt đầu chụp liên tục: {e}")
+                self.update_status(f"Lỗi khi bắt đầu chụp liên tục: {e}", "red")
+            finally:
+                self.camera.StopGrabbing()
+                cv2.destroyAllWindows()
 
         # Kiểm tra và dừng luồng cũ nếu đang chạy
         if self.grab_thread and self.grab_thread.is_alive():
@@ -189,3 +198,9 @@ class BaslerCamera():
         
         self.ui_widget.label_Cam1.setPixmap(scaled_pixmap1)
         self.ui_widget.label_Cam2.setPixmap(scaled_pixmap2)
+        
+        # _, triggerSquare = self.detect_square(self.image_camera_basler)
+        # if triggerSquare:
+        #     self.ui_widget.frame_Cam.setStyleSheet("border: 3px solid green;")
+        # else:
+        #     self.ui_widget.frame_Cam.setStyleSheet("border: 3px solid red;")
